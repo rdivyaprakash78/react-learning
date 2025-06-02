@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import "./Tiles.css";
 
-function Tiles() {
+function Tiles({ rowIndex, updateGuess, readOnlyRow }) {
   const [letters, setLetters] = useState(["", "", "", "", ""]);
   const [validWords, setValidWords] = useState([]);
   const guessLength = 5;
@@ -70,6 +70,8 @@ function Tiles() {
       if (validity === "invalid") {
         alert("Invalid input");
       } else {
+        const wordSubmitted = letters.join("").trim();
+        updateGuess(wordSubmitted, rowIndex);
         console.log("Valid submission");
       }
     }
@@ -88,7 +90,7 @@ function Tiles() {
           ref={(el) => (inputRefs.current[idx] = el)}
           onChange={(e) => handleChange(e, idx)}
           onKeyDown={(e) => handleKeyDown(e, idx)}
-          readOnly={idx > 0 && letters[idx - 1] === ""}
+          readOnly={readOnlyRow || (idx > 0 && letters[idx - 1] === "")}
         ></input>
       ))}
     </div>
