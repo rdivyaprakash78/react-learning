@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import "./Tiles.css";
 
-function Tiles({ rowIndex, updateGuess, readOnlyRow }) {
+function Tiles({ rowIndex, updateGuess, readOnlyRow, disableRow }) {
   const [letters, setLetters] = useState(["", "", "", "", ""]);
   const [validWords, setValidWords] = useState([]);
   const guessLength = 5;
@@ -91,6 +91,7 @@ function Tiles({ rowIndex, updateGuess, readOnlyRow }) {
           onChange={(e) => handleChange(e, idx)}
           onKeyDown={(e) => handleKeyDown(e, idx)}
           readOnly={readOnlyRow || (idx > 0 && letters[idx - 1] === "")}
+          disabled={disableRow}
         ></input>
       ))}
     </div>

@@ -22,6 +22,7 @@ function App() {
           rowIndex={idx}
           updateGuess={updateGuess}
           readOnlyRow={idx > 0 && guesses[idx - 1] === ""}
+          disableRow={guesses[idx] != ""}
         ></Tiles>
       ))}
     </div>
